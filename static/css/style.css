@@ -1,0 +1,216 @@
+/* リセット CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ヘッダー */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* フィルターセクション */
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+#prefecture-filter {
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+#prefecture-filter:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-item {
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #666;
+}
+
+/* テーブル */
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.weather-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.weather-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.weather-table th {
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.weather-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.weather-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.weather-table td {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+/* 降水量の値 */
+.value-cell {
+    text-align: center;
+}
+
+.rain-value {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    background-color: #e9ecef;
+    color: #6c757d;
+    min-width: 60px;
+}
+
+.rain-value.has-rain {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* データがない場合 */
+.no-data {
+    text-align: center;
+    padding: 50px 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #666;
+    font-size: 1.2em;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .filter-section {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .stats {
+        justify-content: center;
+    }
+    
+    .weather-table {
+        font-size: 14px;
+    }
+    
+    .weather-table th,
+    .weather-table td {
+        padding: 8px;
+    }
+    
+    .weather-table th:nth-child(1),
+    .weather-table td:nth-child(1) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather-table th:nth-child(2),
+    .weather-table td:nth-child(2) {
+        display: none;
+    }
+    
+    .rain-value {
+        min-width: 50px;
+        padding: 4px 8px;
+    }
+}

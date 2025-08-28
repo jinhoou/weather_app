@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>気象観測所データ</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>気象観測所データ</h1>
+            <p class="subtitle">現在の降水量データを表示</p>
+        </header>
+
+        <div class="filter-section">
+            <div class="filter-group">
+                <label for="prefecture-filter">都道府県で絞り込み:</label>
+                <select id="prefecture-filter" onchange="filterByPrefecture()">
+                    <option value="">すべて</option>
+                    {% for prefecture in prefectures %}
+                    <option value="{{ prefecture }}" {% if prefecture == selected_prefecture %}selected{% endif %}>
+                        {{ prefecture }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="stats">
+                <span class="stat-item">総観測所数: <span id="total-count">{{ stations|length }}</span></span>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="weather-table" id="weather-table">
+                <thead>
+                    <tr>
+                        <th>観測所番号</th>
+                        <th>都道府県</th>
+                        <th>地点</th>
+                        <th>現在値 (mm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for station in stations %}
+                    <tr>
+                        <td>{{ station.station_id }}</td>
+                        <td>{{ station.prefecture }}</td>
+                        <td>{{ station.location }}</td>
+                        <td class="value-cell">
+                            <span class="rain-value {% if station.current_value > 0 %}has-rain{% endif %}">
+                                {{ station.current_value }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if not stations %}
+        <div class="no-data">
+            <p>表示するデータがありません。</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+</body>
+</html>
